@@ -1,0 +1,10 @@
+# Laravel (backend)  
+academy-backend-laravel/vendor/  
+academy-backend-laravel/.env  
+
+# Node.js (frontend)  
+academy-frontend-nextjs/node_modules/  
+
+# Other common ignores  
+.DS_Store  
+*.log
