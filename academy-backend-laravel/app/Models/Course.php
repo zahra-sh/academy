@@ -12,15 +12,15 @@ class Course extends Model
         'name',
         'start_date',
         'end_date',
-        'user_id',
+        'teacher_id',
         'status'
     ];
 
-    public function user() {  
-        return $this->belongsTo(User::class, 'user_id');  
-    }  
+    public function teacher() {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
 
-    public function students() {  
-        return $this->belongsToMany(User::class);  
-    }  
+    public function students() {
+        return $this->belongsToMany(User::class);
+    }
 }

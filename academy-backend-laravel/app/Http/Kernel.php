@@ -17,7 +17,12 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
 //        'auth' => \App\Http\Middleware\Authenticate::class,
-        'role' => \App\Http\Middleware\CheckRole::class,
 //        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'role' => \App\Http\Middleware\CheckRole::class,
+        'cors' => \App\Http\Middleware\Cors::class,
+    ];
+
+    protected $middleware = [
+        \App\Http\Middleware\Cors::class,
     ];
 }

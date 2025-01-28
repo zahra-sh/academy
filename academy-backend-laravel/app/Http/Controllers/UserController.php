@@ -32,6 +32,21 @@ class UserController extends Controller
         return response()->json(['error' => 'Image not found'], 404);
     }
 
+    public function getAttendees(Request $request){
+        $usersQuery = User::query();
+
+        $role = $request->query('role') ? $request->query('role') : 'ordinary';
+        $usersQuery->where('role', $role);
+
+        $users = $usersQuery->select('id', 'name', 'family', 'image')->paginate(5);
+
+        $users->getCollection()->transform(function ($user) {
+            $user->image = url('storage/' . $user->image); // Construct the full URL for the image
+            return $user;
+        });
+        return response()->json($users, 200);
+    }
+
     public function index(Request $request) {
         $usersQuery = User::query();
 
@@ -39,7 +54,7 @@ class UserController extends Controller
         $role = $request->query('role') ? $request->query('role') : 'ordinary';
         $usersQuery->where('role', $role);
 
-        $users = $usersQuery->select('id', 'name', 'family', 'email', 'mobile', 'image')->paginate(5);
+        $users = $usersQuery->select('id', 'name', 'family', 'email', 'mobile')->paginate(3);//, 'image'
 
         $users->getCollection()->transform(function ($user) {
             $user->image = url('storage/' . $user->image); // Construct the full URL for the image

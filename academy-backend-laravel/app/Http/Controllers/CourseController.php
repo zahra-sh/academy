@@ -39,7 +39,7 @@ class CourseController extends Controller
     }
 
     public function index(Request $request) {
-        $today = now(); // Get current date and time
+        $today = now();
         $coursesQuery = Course::query();
 
         if ($request->query('status')) {
@@ -47,7 +47,7 @@ class CourseController extends Controller
             $coursesQuery->where('status',  $request->query('status'));
         }
 
-        $courses = $coursesQuery->paginate(10);
+        $courses = $coursesQuery->with('teacher')->paginate(10);
         return response()->json($courses, 200);
     }
 

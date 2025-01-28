@@ -11,5 +11,6 @@ class Option extends Model
     protected $fillable = [
         'text',
         'icon',
+        'active'
     ];
 }

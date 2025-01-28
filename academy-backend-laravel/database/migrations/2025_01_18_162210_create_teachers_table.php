@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('restrict');
             $table->string('name');
-            $table->date('start_date');
-            $table->date('end_date')->nullable();
-            $table->foreignId('user_id')->constrained('users')->nullable();
-            $table->enum('status', ['upcoming', 'ongoing', 'completed']);
+            $table->enum('education_level', [
+                'Diploma',
+                "Bachelor`s Degree",
+                "Master`s Degree",
+                'PhD',
+                'Technical Diploma'
+            ]);
+            $table->string('field_of_study');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('teachers');
     }
 };
